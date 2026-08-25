@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   ExitIcon,
   UserIcon,
@@ -19,36 +20,59 @@ import {
   TrashIcon,
   ChevronRight,
 } from "./icons";
+import { DeleteProfileModal } from "./DeleteProfileModal";
 
 export function ProfileScreen({
   onOpenChat,
   onOpenSubscription,
   onOpenStats,
+  onOpenPersonalInfo,
+  onOpenPrivacy,
+  onOpenHeartZones,
+  onOpenAlarmButton,
+  onOpenLegalInfo,
+  onOpenReviews,
+  onOpenTrainerCabinet,
+  onOpenCorporation,
+  onOpenRating,
+  onOpenBonusHistory,
 }: {
   onOpenChat: () => void;
   onOpenSubscription: () => void;
   onOpenStats: () => void;
+  onOpenPersonalInfo: () => void;
+  onOpenPrivacy: () => void;
+  onOpenHeartZones: () => void;
+  onOpenAlarmButton: () => void;
+  onOpenLegalInfo: () => void;
+  onOpenReviews: () => void;
+  onOpenTrainerCabinet: () => void;
+  onOpenCorporation: () => void;
+  onOpenRating: () => void;
+  onOpenBonusHistory: () => void;
 }) {
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+
   const stats = [
-    { Icon: ChartIcon, num: "2426", label: "Рейтинг SFF" },
+    { Icon: ChartIcon, num: "2426", label: "Рейтинг SFF", onClick: onOpenRating },
     { Icon: FlameIcon, num: "1 240 ккал", label: "за все время" },
     { Icon: DumbbellIcon, num: "Новичок", label: "0 уровень" },
     { Icon: TrophyIcon, num: "342 ккал", label: "рекорд" },
   ];
 
   const items: { Icon: typeof InfoIcon; label: string; onClick?: () => void }[] = [
-    { Icon: InfoIcon, label: "Личная информация" },
-    { Icon: ShieldIcon, label: "Конфиденциальность" },
+    { Icon: InfoIcon, label: "Личная информация", onClick: onOpenPersonalInfo },
+    { Icon: ShieldIcon, label: "Конфиденциальность", onClick: onOpenPrivacy },
     { Icon: StarIcon, label: "Подписка", onClick: onOpenSubscription },
-    { Icon: HeartIcon, label: "Пульсовые зоны" },
-    { Icon: SparkIcon, label: "Тревожная кнопка" },
-    { Icon: DocIcon, label: "Правовая информация" },
+    { Icon: HeartIcon, label: "Пульсовые зоны", onClick: onOpenHeartZones },
+    { Icon: SparkIcon, label: "Тревожная кнопка", onClick: onOpenAlarmButton },
+    { Icon: DocIcon, label: "Правовая информация", onClick: onOpenLegalInfo },
     { Icon: CalendarIcon, label: "Тренировочные планы" },
     { Icon: MessageIcon, label: "Сообщения", onClick: onOpenChat },
-    { Icon: TagIcon, label: "Отзывы" },
-    { Icon: DumbbellIcon, label: "Кабинет тренера" },
+    { Icon: TagIcon, label: "Отзывы", onClick: onOpenReviews },
+    { Icon: DumbbellIcon, label: "Кабинет тренера", onClick: onOpenTrainerCabinet },
     { Icon: ChartIcon, label: "Статистика", onClick: onOpenStats },
-    { Icon: BuildingIcon, label: "Корпорация" },
+    { Icon: BuildingIcon, label: "Корпорация", onClick: onOpenCorporation },
   ];
 
   return (
@@ -65,12 +89,21 @@ export function ProfileScreen({
             <UserIcon />
           </div>
         </div>
-        <div className="bonus-pill">
+        <button
+          className="bonus-pill"
+          style={{ width: "100%", border: "1px solid #3fae4f", cursor: "pointer" }}
+          onClick={onOpenBonusHistory}
+        >
           <CoinIcon /> 305 бонусов <span className="delta">▲ 300</span>
-        </div>
+        </button>
         <div className="stat-grid">
           {stats.map((s) => (
-            <div className="stat-card" key={s.label}>
+            <button
+              className="stat-card"
+              key={s.label}
+              onClick={s.onClick}
+              style={{ textAlign: "left", cursor: s.onClick ? "pointer" : "default" }}
+            >
               <div className="stat-card-icon">
                 <s.Icon />
               </div>
@@ -78,7 +111,7 @@ export function ProfileScreen({
                 <p className="stat-card-num">{s.num}</p>
                 <p className="stat-card-label">{s.label}</p>
               </div>
-            </div>
+            </button>
           ))}
         </div>
         <div className="profile-list">
@@ -91,7 +124,7 @@ export function ProfileScreen({
               <ChevronRight className="pchev" />
             </button>
           ))}
-          <button className="profile-item danger">
+          <button className="profile-item danger" onClick={() => setDeleteModalOpen(true)}>
             <span className="profile-item-icon">
               <TrashIcon />
             </span>
@@ -99,6 +132,12 @@ export function ProfileScreen({
           </button>
         </div>
       </div>
+      {deleteModalOpen && (
+        <DeleteProfileModal
+          onConfirm={() => setDeleteModalOpen(false)}
+          onCancel={() => setDeleteModalOpen(false)}
+        />
+      )}
     </>
   );
 }
