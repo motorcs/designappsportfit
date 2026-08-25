@@ -36,6 +36,7 @@ export function ProfileScreen({
   onOpenCorporation,
   onOpenRating,
   onOpenBonusHistory,
+  onOpenTrainingPlans,
 }: {
   onOpenChat: () => void;
   onOpenSubscription: () => void;
@@ -50,6 +51,7 @@ export function ProfileScreen({
   onOpenCorporation: () => void;
   onOpenRating: () => void;
   onOpenBonusHistory: () => void;
+  onOpenTrainingPlans: () => void;
 }) {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
@@ -67,7 +69,7 @@ export function ProfileScreen({
     { Icon: HeartIcon, label: "Пульсовые зоны", onClick: onOpenHeartZones },
     { Icon: SparkIcon, label: "Тревожная кнопка", onClick: onOpenAlarmButton },
     { Icon: DocIcon, label: "Правовая информация", onClick: onOpenLegalInfo },
-    { Icon: CalendarIcon, label: "Тренировочные планы" },
+    { Icon: CalendarIcon, label: "Тренировочные планы", onClick: onOpenTrainingPlans },
     { Icon: MessageIcon, label: "Сообщения", onClick: onOpenChat },
     { Icon: TagIcon, label: "Отзывы", onClick: onOpenReviews },
     { Icon: DumbbellIcon, label: "Кабинет тренера", onClick: onOpenTrainerCabinet },

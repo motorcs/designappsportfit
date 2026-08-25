@@ -5,7 +5,7 @@ export type Tab = "studios" | "history" | "workout" | "chat" | "profile";
 const items: { id: Tab; label: string; Icon: typeof MapPinIcon }[] = [
   { id: "studios", label: "Студии", Icon: MapPinIcon },
   { id: "history", label: "История", Icon: CalendarIcon },
-  { id: "workout", label: "Тренировки", Icon: DumbbellIcon },
+  { id: "workout", label: "Тренировка", Icon: DumbbellIcon },
   { id: "chat", label: "Чат", Icon: MessageIcon },
   { id: "profile", label: "Профиль", Icon: UserIcon },
 ];

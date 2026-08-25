@@ -3,70 +3,141 @@ import { muscleGroups, type MusclePart } from "./data";
 export function BodySilhouette({ size = 96 }: { size?: number }) {
   const op = (part: MusclePart) => {
     const g = muscleGroups.find((m) => m.part === part);
-    return g ? (0.2 + (g.pct / 100) * 0.7).toFixed(2) : "0.16";
+    return g ? (0.3 + (g.pct / 100) * 0.65).toFixed(2) : "0.18";
   };
 
+  const seam = "rgba(0,0,0,0.6)";
+  const outline = "rgba(241,241,241,0.3)";
+  const mopS = op("shoulders");
+  const mopC = op("chest");
+  const mopA = op("abs");
+  const mopAr = op("arms");
+  const mopG = op("glutes");
+  const mopL = op("legs");
+
+  const torso =
+    "M44 18 C44 14 56 14 56 18 L57 22 C61 24 65 28 68 35 C68 43 66 50 63 56 C67 60 68 66 66 73 C64 78 59 86 52 90 L48 90 C41 86 36 78 34 73 C32 66 33 60 37 56 C34 50 32 43 32 35 C35 28 39 24 43 22 Z";
+
+  const Limbs = ({ mirror }: { mirror?: boolean }) => (
+    <g transform={mirror ? "translate(100,0) scale(-1,1)" : undefined}>
+      <path
+        d="M31 36c-6 3-10 10-11 19l-1 15c0 3 2 5 5 5 2 0 4-2 4-4l1-13c1-6 3-11 6-16-1-2-3-4-4-6z"
+        fill="var(--red)"
+        fillOpacity={mopAr}
+        stroke={seam}
+        strokeWidth={1}
+      />
+      <path
+        d="M24 70c-2 6-3 13-2 20l1 6c0 3 2 4 4 4 3 0 4-2 4-5l-1-16-1-9z"
+        fill="var(--red)"
+        fillOpacity={mopAr}
+        stroke={seam}
+        strokeWidth={1}
+      />
+      <path
+        d="M25 100c-2 1-3 3-3 6 0 4 1 8 3 10 3 2 4-1 4-4l1-4 2 3c1 2 3 1 3-1l-1-4 2 2c1 1 3 0 2-2l-3-5c-3-2-6-2-10-1z"
+        fill="rgba(241,241,241,0.07)"
+        stroke={outline}
+        strokeWidth={1}
+      />
+      <path
+        d="M40 90l-4 38c-1 8 0 15 3 19 3 2 6 1 7-4l3-53z"
+        fill="var(--red)"
+        fillOpacity={mopL}
+        stroke={seam}
+        strokeWidth={1}
+      />
+    </g>
+  );
+
+  const Legs = ({ mirror }: { mirror?: boolean }) => (
+    <g transform={mirror ? "translate(100,0) scale(-1,1)" : undefined}>
+      <ellipse
+        cx="43"
+        cy="151"
+        rx="5"
+        ry="4"
+        fill="var(--red)"
+        fillOpacity={(parseFloat(mopL) * 0.85).toFixed(2)}
+        stroke={seam}
+        strokeWidth={1}
+      />
+      <path
+        d="M38 155l-1 23c0 6 3 10 6 10s6-4 5-10l-1-23z"
+        fill="var(--red)"
+        fillOpacity={mopL}
+        stroke={seam}
+        strokeWidth={1}
+      />
+      <path
+        d="M34 190c-4 1-6 4-6 7 0 4 4 6 9 5 3-1 5-3 5-6 0-2-1-5-3-6-2-1-3-1-5 0z"
+        fill="rgba(241,241,241,0.07)"
+        stroke={outline}
+        strokeWidth={1}
+      />
+    </g>
+  );
+
+  const Deltoid = ({ mirror }: { mirror?: boolean }) => (
+    <g transform={mirror ? "translate(100,0) scale(-1,1)" : undefined}>
+      <path
+        d="M25 32c0-6 5-9 10-8 4 1 7 5 7 10 0 6-4 11-9 11-5 0-8-4-9-9 0-2 0-3 1-4z"
+        fill="var(--red)"
+        fillOpacity={mopS}
+        stroke={seam}
+        strokeWidth={1}
+      />
+    </g>
+  );
+
   return (
-    <svg width={size} height={size * 1.68} viewBox="0 0 100 168" fill="none">
-      <ellipse cx="50" cy="11" rx="9.5" ry="11" fill="var(--red)" fillOpacity={0.5} />
-      <path d="M45 20h10v7h-10z" fill="var(--red)" fillOpacity={0.4} />
+    <svg width={size} height={size * 2} viewBox="0 0 100 200" fill="none">
+      <defs>
+        <clipPath id="bsNeck2">
+          <rect x="0" y="10" width="100" height="20" />
+        </clipPath>
+        <clipPath id="bsChest2">
+          <rect x="0" y="30" width="100" height="28" />
+        </clipPath>
+        <clipPath id="bsAbs2">
+          <rect x="0" y="58" width="100" height="16" />
+        </clipPath>
+        <clipPath id="bsHip2">
+          <rect x="0" y="74" width="100" height="16" />
+        </clipPath>
+      </defs>
+      {/* head + hair */}
       <path
-        d="M28 34c6-6 14-9 22-9s16 3 22 9c2 2 1 5-2 5-6-4-12-6-20-6s-14 2-20 6c-3 0-4-3-2-5z"
-        fill="var(--red)"
-        fillOpacity={op("shoulders")}
+        d="M50 4c6 0 10 5 10 11 0 4-1 7.5-3.5 10.5-2 2.5-4 4-6.5 5-2.5-1-4.5-2.5-6.5-5C41 22.5 40 19 40 15c0-6 4-11 10-11z"
+        fill="rgba(241,241,241,0.06)"
+        stroke={outline}
+        strokeWidth={1}
       />
       <path
-        d="M33 33c5-2 11-3 17-3s12 1 17 3c3 8 3 17 0 25-5 3-11 4-17 4s-12-1-17-4c-3-8-3-17 0-25z"
-        fill="var(--red)"
-        fillOpacity={op("chest")}
+        d="M40.5 10c2-4.5 5.5-7 9.5-7s7.5 2.5 9.5 7c.7 1.6.9 3 .7 4.5-3-2.7-6-4-10.2-4s-7.2 1.3-10.2 4c-.2-1.5 0-2.9.7-4.5z"
+        fill="rgba(20,20,20,0.85)"
+        stroke={outline}
+        strokeWidth={0.8}
       />
-      <path
-        d="M36 58c4 2 9 3 14 3s10-1 14-3c1 7 0 14-3 20-3 3-7 5-11 5s-8-2-11-5c-3-6-4-13-3-20z"
-        fill="var(--red)"
-        fillOpacity={op("abs")}
-      />
-      <path d="M25 34l5 30-4 10-6-3 2-32z" fill="var(--red)" fillOpacity={op("back")} />
-      <path d="M75 34l-5 30 4 10 6-3-2-32z" fill="var(--red)" fillOpacity={op("back")} />
-      <path
-        d="M27 36c-6 3-10 10-11 20l-2 22c-1 4 4 6 6 2l3-9 6-24c1-4 1-8-2-11z"
-        fill="var(--red)"
-        fillOpacity={op("arms")}
-      />
-      <path
-        d="M73 36c6 3 10 10 11 20l2 22c1 4-4 6-6 2l-3-9-6-24c-1-4-1-8 2-11z"
-        fill="var(--red)"
-        fillOpacity={op("arms")}
-      />
-      <circle cx="18" cy="82" r="4.5" fill="var(--red)" fillOpacity={op("arms")} />
-      <circle cx="82" cy="82" r="4.5" fill="var(--red)" fillOpacity={op("arms")} />
-      <path
-        d="M38 83c4 2 8 3 12 3s8-1 12-3l3 12c-4 4-9 6-15 6s-11-2-15-6z"
-        fill="var(--red)"
-        fillOpacity={op("glutes")}
-      />
-      <path
-        d="M39 95l-5 45c-1 5 3 8 6 6 2-1 3-3 3-5l4-40c1-3-1-6-4-6-2 0-3 0-4 0z"
-        fill="var(--red)"
-        fillOpacity={op("legs")}
-      />
-      <path
-        d="M61 95l5 45c1 5-3 8-6 6-2-1-3-3-3-5l-4-40c-1-3 1-6 4-6 2 0 3 0 4 0z"
-        fill="var(--red)"
-        fillOpacity={op("legs")}
-      />
-      <path
-        d="M40 141l-2 17c0 3 3 5 5 3l3-5 2 4c1 3 5 2 5-1l-3-18z"
-        fill="var(--red)"
-        fillOpacity={op("legs")}
-      />
-      <path
-        d="M60 141l2 17c0 3-3 5-5 3l-3-5-2 4c-1 3-5 2-5-1l3-18z"
-        fill="var(--red)"
-        fillOpacity={op("legs")}
-      />
-      <g stroke="rgba(241,241,241,0.22)" strokeWidth={0.9} fill="none">
-        <path d="M50 25v13M50 55v6M50 78v5" />
+      <Limbs />
+      <Limbs mirror />
+      {/* neck / shoulders / chest / abs / hip zones share one outline so nothing floats or gaps */}
+      <path d={torso} fill="var(--red)" fillOpacity={mopS} clipPath="url(#bsNeck2)" />
+      <path d={torso} fill="var(--red)" fillOpacity={mopC} clipPath="url(#bsChest2)" />
+      <path d={torso} fill="var(--red)" fillOpacity={mopA} clipPath="url(#bsAbs2)" />
+      <path d={torso} fill="var(--red)" fillOpacity={mopG} clipPath="url(#bsHip2)" />
+      <path d={torso} fill="none" stroke={seam} strokeWidth={1} />
+      {/* muscle definition lines, stroke-only so they never create seams/gaps */}
+      <g stroke={seam} strokeWidth={1} fill="none" strokeLinecap="round">
+        <path d="M50 35v55" />
+        <path d="M35 38c6 4 9 4 15 4s9 0 15-4" />
+        <path d="M40 62h20M41 68h18M42.5 74h15" />
+        <path d="M37 58l-4 16M63 58l4 16" />
       </g>
+      <Deltoid />
+      <Deltoid mirror />
+      <Legs />
+      <Legs mirror />
     </svg>
   );
 }

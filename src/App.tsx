@@ -1,12 +1,18 @@
 import { useState } from "react";
 import { PhoneShell } from "./PhoneShell";
 import { BottomNav, type Tab } from "./BottomNav";
+import { SplashScreen } from "./SplashScreen";
 import { StudiosScreen } from "./StudiosScreen";
 import { BookingScreen } from "./BookingScreen";
 import { SubscriptionScreen } from "./SubscriptionScreen";
 import { HistoryScreen } from "./HistoryScreen";
 import { StatsScreen } from "./StatsScreen";
+import { TrainingScreen } from "./TrainingScreen";
 import { WorkoutScreen } from "./WorkoutScreen";
+import { TrainingSettingsScreen } from "./TrainingSettingsScreen";
+import { SuggestFormScreen } from "./SuggestFormScreen";
+import { ComplaintScreen } from "./ComplaintScreen";
+import { TrainingPlansScreen } from "./TrainingPlansScreen";
 import { ChatScreen } from "./ChatScreen";
 import { ProfileScreen } from "./ProfileScreen";
 import { PersonalInfoScreen } from "./PersonalInfoScreen";
@@ -21,12 +27,19 @@ import { RatingScreen } from "./RatingScreen";
 import { BonusHistoryScreen } from "./BonusHistoryScreen";
 
 type Screen =
+  | "splash"
   | "studios"
   | "booking"
   | "subscription"
   | "history"
   | "stats"
   | "workout"
+  | "workoutDetail"
+  | "trainingSettings"
+  | "suggestForm"
+  | "complaintStudio"
+  | "complaintTrainer"
+  | "trainingPlans"
   | "chat"
   | "profile"
   | "personalInfo"
@@ -41,6 +54,7 @@ type Screen =
   | "bonusHistory";
 
 const NO_NAV: Screen[] = [
+  "splash",
   "booking",
   "subscription",
   "stats",
@@ -54,11 +68,17 @@ const NO_NAV: Screen[] = [
   "corporation",
   "rating",
   "bonusHistory",
+  "trainingPlans",
+  "workoutDetail",
+  "trainingSettings",
+  "suggestForm",
+  "complaintStudio",
+  "complaintTrainer",
 ];
 
 function App() {
   const [tab, setTab] = useState<Tab>("studios");
-  const [screen, setScreen] = useState<Screen>("studios");
+  const [screen, setScreen] = useState<Screen>("splash");
   const [historyIdx, setHistoryIdx] = useState(0);
 
   const showNav = !NO_NAV.includes(screen);
@@ -72,6 +92,7 @@ function App() {
     <PhoneShell>
       <div className="h-full flex flex-col">
         <div className="flex-1 flex flex-col min-h-0 screen">
+          {screen === "splash" && <SplashScreen onDone={() => switchTab("studios")} />}
           {screen === "studios" && <StudiosScreen onOpenStudio={() => setScreen("booking")} />}
           {screen === "booking" && (
             <BookingScreen
@@ -85,13 +106,36 @@ function App() {
               onOpenStats={() => setScreen("stats")}
               onOpenWorkout={(idx) => {
                 setHistoryIdx(idx);
-                setScreen("workout");
+                setScreen("workoutDetail");
               }}
             />
           )}
           {screen === "stats" && <StatsScreen onBack={() => setScreen("history")} />}
           {screen === "workout" && (
+            <TrainingScreen onOpenSettings={() => setScreen("trainingSettings")} />
+          )}
+          {screen === "workoutDetail" && (
             <WorkoutScreen historyIdx={historyIdx} onBack={() => setScreen("history")} />
+          )}
+          {screen === "trainingSettings" && (
+            <TrainingSettingsScreen
+              onBack={() => switchTab("workout")}
+              onOpenSuggestForm={() => setScreen("suggestForm")}
+              onOpenComplaintStudio={() => setScreen("complaintStudio")}
+              onOpenComplaintTrainer={() => setScreen("complaintTrainer")}
+            />
+          )}
+          {screen === "suggestForm" && (
+            <SuggestFormScreen onBack={() => setScreen("trainingSettings")} />
+          )}
+          {screen === "complaintStudio" && (
+            <ComplaintScreen kind="studio" onBack={() => setScreen("trainingSettings")} />
+          )}
+          {screen === "complaintTrainer" && (
+            <ComplaintScreen kind="trainer" onBack={() => setScreen("trainingSettings")} />
+          )}
+          {screen === "trainingPlans" && (
+            <TrainingPlansScreen onBack={() => switchTab("profile")} />
           )}
           {screen === "chat" && <ChatScreen />}
           {screen === "profile" && (
@@ -109,6 +153,7 @@ function App() {
               onOpenCorporation={() => setScreen("corporation")}
               onOpenRating={() => setScreen("rating")}
               onOpenBonusHistory={() => setScreen("bonusHistory")}
+              onOpenTrainingPlans={() => setScreen("trainingPlans")}
             />
           )}
           {screen === "personalInfo" && (

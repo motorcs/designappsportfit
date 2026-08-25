@@ -468,6 +468,192 @@ export function LocateIcon({ className }: IconProps) {
   );
 }
 
+export function ScaleIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className}>
+      <rect x="3.5" y="3.5" width="17" height="17" rx="4" stroke="currentColor" strokeWidth="1.6" />
+      <path d="M12 8v4l3 2" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M8 6.5 6.5 8M16 6.5 17.5 8" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+export function TreadmillIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className}>
+      <path d="M3 17h13l3-3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+      <rect x="3" y="15.2" width="12" height="2.6" rx="1.3" stroke="currentColor" strokeWidth="1.3" />
+      <path d="M13 11V6.5a2 2 0 0 1 2-2h1" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+      <circle cx="16.5" cy="4" r="1.6" stroke="currentColor" strokeWidth="1.4" />
+    </svg>
+  );
+}
+
+export function SmithIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className}>
+      <path d="M6 3v18M18 3v18" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+      <rect x="3" y="10" width="18" height="3" rx="1" stroke="currentColor" strokeWidth="1.6" />
+      <path d="M9 21h6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+export function BenchIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className}>
+      <rect x="3" y="9" width="15" height="3.4" rx="1" stroke="currentColor" strokeWidth="1.6" />
+      <path d="M5 12.4V19M16 12.4V19M18 9l3-4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+export function BarbellShortIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className}>
+      <path d="M2 12h4M18 12h4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      <rect x="6" y="9" width="2.4" height="6" rx="0.8" fill="currentColor" />
+      <rect x="15.6" y="9" width="2.4" height="6" rx="0.8" fill="currentColor" />
+      <path d="M8.4 12h7.2" stroke="currentColor" strokeWidth="1.8" />
+    </svg>
+  );
+}
+
+export function BarbellZIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className}>
+      <rect x="3" y="10" width="2.4" height="6" rx="0.8" fill="currentColor" />
+      <rect x="18.6" y="10" width="2.4" height="6" rx="0.8" fill="currentColor" />
+      <path
+        d="M5.4 13h3l2-3h3l2 3h3"
+        stroke="currentColor"
+        strokeWidth="1.7"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+export function DumbbellPairIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className}>
+      <path d="M4 9v6M2.5 10.5v3M18 9v6M19.5 10.5v3M7 12h9" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      <rect x="4" y="9" width="3" height="6" rx="1.3" stroke="currentColor" strokeWidth="1.6" />
+      <rect x="17" y="9" width="3" height="6" rx="1.3" stroke="currentColor" strokeWidth="1.6" />
+    </svg>
+  );
+}
+
+export function ExpanderIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className}>
+      <path d="M4 8c3 3 3 5 0 8M20 8c-3 3-3 5 0 8" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
+      <path d="M4 8v8M20 8v8" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
+      <path d="M7 12h10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeDasharray="2.5 2.5" />
+    </svg>
+  );
+}
+
+export function MatIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className}>
+      <rect x="3" y="7" width="18" height="10" rx="3" stroke="currentColor" strokeWidth="1.6" />
+      <path d="M8 7v10M14 7v10" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+export function MultiGymIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className}>
+      <path d="M5 3v18M19 3v18M5 6h14M5 18h14" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+      <circle cx="12" cy="6" r="1.3" fill="currentColor" />
+      <path d="M12 7.3V15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+export function PlusCircleIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className}>
+      <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.7" />
+      <path d="M12 8v8M8 12h8" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+export function WrenchIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className}>
+      <path
+        d="M14.7 6.3a4 4 0 0 1-5.2 5.2L4 17l3 3 5.5-5.5a4 4 0 0 1 5.2-5.2l-2.2 2.2-2-2z"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+export function BulbIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className}>
+      <path
+        d="M9 18h6M10 21h4M8 14.5A5 5 0 1 1 16 14.5c-.8.9-1.5 1.6-1.5 3H9.5c0-1.4-.7-2.1-1.5-3z"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+export function DumbbellWarnIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className}>
+      <path
+        d="M4 9v6M2.5 10.5v3M14 9v6M15.5 10.5v3M6.5 12h4.5"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+      />
+      <rect x="4" y="9" width="2.4" height="6" rx="1" stroke="currentColor" strokeWidth="1.4" />
+      <rect x="12.6" y="9" width="2.4" height="6" rx="1" stroke="currentColor" strokeWidth="1.4" />
+      <path d="M19 8.5l3.2 6.5H15.8z" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" />
+      <path d="M19 11v1.6" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+      <circle cx="19" cy="14.1" r="0.15" fill="currentColor" stroke="currentColor" strokeWidth="0.6" />
+    </svg>
+  );
+}
+
+export function PersonWarnIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className}>
+      <circle cx="9" cy="7" r="3" stroke="currentColor" strokeWidth="1.6" />
+      <path d="M3.5 18c.9-3 3-4.5 5.5-4.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+      <path d="M19 8.5l3.2 6.5H15.8z" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" />
+      <path d="M19 11v1.6" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+      <circle cx="19" cy="14.1" r="0.15" fill="currentColor" stroke="currentColor" strokeWidth="0.6" />
+    </svg>
+  );
+}
+
+export function SendIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className}>
+      <path
+        d="M4 12.5 20 4l-5.5 16-3.3-6.7L4 12.5z"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinejoin="round"
+      />
+      <path d="M11.2 13.3 20 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+    </svg>
+  );
+}
+
 export function MapPinIcon({ className }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="none" className={className}>

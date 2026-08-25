@@ -22,20 +22,20 @@ export function PersonalInfoScreen({ onBack }: { onBack: () => void }) {
       </div>
       <div className="form-field">
         <label>Имя</label>
-        <input defaultValue="Данила" />
+        <input defaultValue="Максим" />
       </div>
       <div className="form-field">
         <label>Фамилия</label>
-        <input defaultValue="Моторин" />
+        <input defaultValue="Соколов" />
       </div>
       <div className="form-field">
         <label>Отчество</label>
-        <input defaultValue="Сергеевич" />
+        <input defaultValue="Андреевич" />
       </div>
       <div className="form-field form-field-icon">
         <div style={{ flex: 1 }}>
           <label>Дата рождения</label>
-          <input defaultValue="23.05.2005" />
+          <input defaultValue="11.02.1998" />
         </div>
         <CalendarIcon />
       </div>
@@ -52,21 +52,21 @@ export function PersonalInfoScreen({ onBack }: { onBack: () => void }) {
         <div className="form-field">
           <label>Рост</label>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-            <input defaultValue="185" />
+            <input defaultValue="179" />
             <span className="unit">см</span>
           </div>
         </div>
         <div className="form-field">
           <label>Вес</label>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-            <input defaultValue="75.0" />
+            <input defaultValue="82.4" />
             <span className="unit">кг</span>
           </div>
         </div>
       </div>
       <div className="form-field">
         <label>Телефон</label>
-        <input defaultValue="+7 (991) 723 66 38" />
+        <input defaultValue="+7 (916) 348 12 09" />
       </div>
       <div className="form-field">
         <label>Дополнительная информация</label>
@@ -74,7 +74,7 @@ export function PersonalInfoScreen({ onBack }: { onBack: () => void }) {
           rows={4}
           value={extra}
           onChange={(e) => setExtra(e.target.value)}
-          placeholder="Грыжа шейного отдела позвоночника"
+          placeholder="Аллергия, ограничения по здоровью и т.д."
         />
       </div>
       <p className="char-count">{extra.length}/1024</p>

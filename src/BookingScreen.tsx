@@ -1,6 +1,55 @@
 import { useState } from "react";
-import { dates, times, halls, trainingTypeOptions } from "./data";
-import { ChevronLeft, ChevronRight, StarIcon, UserIcon, HandIcon } from "./icons";
+import { dates, times, halls, trainingTypeOptions, equipment, studioPhotos, studioReviews } from "./data";
+import {
+  ChevronLeft,
+  ChevronRight,
+  StarIcon,
+  UserIcon,
+  HandIcon,
+  CameraIcon,
+  ScaleIcon,
+  TreadmillIcon,
+  SmithIcon,
+  BenchIcon,
+  BarbellZIcon,
+  DumbbellPairIcon,
+  BarbellShortIcon,
+  ExpanderIcon,
+  MultiGymIcon,
+  MatIcon,
+} from "./icons";
+
+const equipmentIcons: Record<string, typeof ScaleIcon> = {
+  scale: ScaleIcon,
+  treadmill: TreadmillIcon,
+  smith: SmithIcon,
+  bench: BenchIcon,
+  barbellZ: BarbellZIcon,
+  dumbbellPair: DumbbellPairIcon,
+  barbellShort: BarbellShortIcon,
+  expander: ExpanderIcon,
+  multiGym: MultiGymIcon,
+  mat: MatIcon,
+};
+
+const bookingTabs = [
+  { id: "record", label: "Запись" },
+  { id: "equipment", label: "Оснащение" },
+  { id: "photos", label: "Фото" },
+  { id: "reviews", label: "Отзывы" },
+] as const;
+
+type BookingTab = (typeof bookingTabs)[number]["id"];
+
+function Stars({ count }: { count: number }) {
+  return (
+    <span className="stars">
+      {Array.from({ length: 5 }).map((_, i) => (
+        <StarIcon key={i} filled={i < count} />
+      ))}
+    </span>
+  );
+}
 
 export function BookingScreen({
   onBack,
@@ -15,8 +64,10 @@ export function BookingScreen({
   const [withTrainer, setWithTrainer] = useState(false);
   const [trainingTypeIdx, setTrainingTypeIdx] = useState(0);
   const [trainingTypeOpen, setTrainingTypeOpen] = useState(false);
+  const [bookingTab, setBookingTab] = useState<BookingTab>("record");
 
   return (
+    <>
     <div className="pad">
       <div className="topbar">
         <button className="iconbtn" onClick={onBack}>
@@ -37,7 +88,23 @@ export function BookingScreen({
           </div>
         </div>
       </div>
+    </div>
 
+    <div className="studio-tabs">
+      {bookingTabs.map((t) => (
+        <button
+          key={t.id}
+          className={`studio-tab ${bookingTab === t.id ? "active" : ""}`}
+          onClick={() => setBookingTab(t.id)}
+        >
+          {t.label}
+        </button>
+      ))}
+    </div>
+
+    <div className="pad">
+      {bookingTab === "record" && (
+        <>
       <div className="section">
         <h2 className="section">Выберите зал</h2>
         <div className="capsule-list">
@@ -168,6 +235,74 @@ export function BookingScreen({
       <button className="cta" onClick={onContinue}>
         Продолжить
       </button>
+        </>
+      )}
+
+      {bookingTab === "equipment" && (
+        <>
+          <h2 className="section">Оснащение</h2>
+          <div className="eq-list">
+            {equipment.map((e, i) => {
+              const Icon = equipmentIcons[e.icon];
+              return (
+                <div className="eq-row" key={i}>
+                  <div className="eq-icon">
+                    <Icon />
+                  </div>
+                  <p>{e.label}</p>
+                </div>
+              );
+            })}
+          </div>
+          <p className="eq-extra-title">Дополнительно</p>
+          <p className="eq-extra">
+            {`Ваше индивидуальное фитнес-пространство.
+Бесключевой доступ через приложение.
+Длительность тренировки — 60 минут.
+Прослушивание любимой музыки через smart-колонку.
+Экраны — информация о ходе вашей тренировки всегда на виду.
+Тревожная кнопка — делает процесс тренировки ещё более безопасным.
+Возможность подключить пульсометр для более детальной аналитики и участия в рейтинге прямо в приложении.
+
+Stop For Fit — это не просто фитнес-клуб. Это место, где вы можете быть собой, сосредоточиться на своих целях и получать удовольствие от тренировок. Наша миссия — помочь вам достичь жизненных целей благодаря энергии, которую вы получаете от физических занятий.`}
+          </p>
+        </>
+      )}
+
+      {bookingTab === "photos" && (
+        <>
+          <h2 className="section">Фото</h2>
+          <div className="photo-grid">
+            {studioPhotos.map((p, i) => (
+              <div className="photo-tile" style={{ background: p.tint }} key={i}>
+                <CameraIcon />
+                <span>{p.label}</span>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
+
+      {bookingTab === "reviews" && (
+        <>
+          <h2 className="section">Отзывы</h2>
+          {studioReviews.map((r, i) => (
+            <div className="studio-review-card" key={i}>
+              <p className="studio-review-name">{r.name}</p>
+              <div className="review-stars">
+                <Stars count={r.stars} />
+                <span className="date">{r.date}</span>
+              </div>
+              {r.text && <p className="review-text">{r.text}</p>}
+              <div className="review-reply">
+                <p className="r-title">Ответ</p>
+                <p>{r.reply}</p>
+              </div>
+            </div>
+          ))}
+        </>
+      )}
     </div>
+    </>
   );
 }
