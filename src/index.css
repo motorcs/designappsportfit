@@ -27,3 +27,26 @@ body {
 ::-webkit-scrollbar {
   display: none;
 }
+
+.map-pin-chip {
+  min-width: 34px;
+  height: 34px;
+  padding: 0 8px;
+  border-radius: 10px;
+  background: #eb3325;
+  color: #f1f1f1;
+  font-size: 13px;
+  font-weight: 800;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 14px rgba(235, 51, 37, 0.45);
+  border: 2px solid #f1f1f1;
+  cursor: pointer;
+}
+
+.leaflet-control-attribution {
+  font-size: 9px !important;
+}
+
