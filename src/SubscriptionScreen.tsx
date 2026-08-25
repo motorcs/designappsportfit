@@ -60,12 +60,10 @@ export function SubscriptionScreen({ onBack }: { onBack: () => void }) {
               className={`plan ${active ? "active" : ""}`}
               onClick={() => setSelected(p.id)}
             >
-              {(p.badge || p.savings) && (
-                <div className="plan-tags">
-                  {p.badge && <span className="tag-badge">{p.badge}</span>}
-                  {p.savings && <span className="tag-save">{p.savings}</span>}
-                </div>
-              )}
+              <div className="plan-tags">
+                {p.badge && <span className="tag-badge">{p.badge}</span>}
+                {p.savings && <span className="tag-save">{p.savings}</span>}
+              </div>
               <div className="plan-row">
                 <div>
                   <p className="plan-title">{p.title}</p>

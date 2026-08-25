@@ -686,6 +686,7 @@ h2.section::before {
   display: flex;
   align-items: center;
   gap: 6px;
+  min-height: 20px;
   margin-bottom: 8px;
 }
 .tag-badge {
