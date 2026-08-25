@@ -1291,7 +1291,7 @@ h2.section::before {
 .profile-header {
   position: relative;
   background: var(--phone-bezel);
-  padding: 14px 20px 40px;
+  padding: 14px 20px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1308,11 +1308,9 @@ h2.section::before {
   top: 12px;
 }
 .profile-avatar-wrap {
-  position: relative;
-  z-index: 1;
   display: flex;
   justify-content: center;
-  margin-top: -30px;
+  margin-top: 18px;
   margin-bottom: 16px;
 }
 .profile-avatar {
