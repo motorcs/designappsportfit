@@ -2,8 +2,8 @@ import type { ReactNode } from "react";
 
 export function PhoneShell({ children }: { children: ReactNode }) {
   return (
-    <div className="relative w-[390px] max-w-full h-[844px] max-h-[92svh] rounded-[46px] border-[10px] border-[#1c1d18] bg-[#0e0f0c] overflow-hidden shadow-[0_30px_80px_-20px_rgba(0,0,0,0.7)] flex flex-col">
-      <div className="absolute top-2 left-1/2 -translate-x-1/2 w-28 h-6 bg-[#1c1d18] rounded-full z-30" />
+    <div className="relative w-[390px] max-w-full h-[844px] max-h-[92svh] rounded-[46px] border-[10px] border-[#101010] bg-[#1a1a1a] overflow-hidden shadow-[0_30px_80px_-20px_rgba(0,0,0,0.7)] flex flex-col">
+      <div className="absolute top-2 left-1/2 -translate-x-1/2 w-28 h-6 bg-[#101010] rounded-full z-30" />
       <StatusBar />
       <div className="flex-1 overflow-y-auto overscroll-contain">{children}</div>
     </div>
@@ -31,7 +31,7 @@ function StatusBar() {
         </svg>
         <div className="flex items-center gap-0.5">
           <div className="w-5 h-2.5 rounded-[3px] border border-white/70 flex items-center px-[1.5px]">
-            <div className="h-full w-3/4 bg-[#C8FF3D] rounded-[1px]" />
+            <div className="h-full w-3/4 bg-[#F1F1F1] rounded-[1px]" />
           </div>
         </div>
       </div>

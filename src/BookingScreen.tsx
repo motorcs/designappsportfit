@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { dates, times, capsules } from "./data";
-import { ChevronLeft, ChevronRight, StarIcon, UserIcon, CapsuleIcon } from "./icons";
+import { dates, times, halls, trainingTypeOptions } from "./data";
+import { ChevronLeft, ChevronRight, StarIcon, UserIcon, HandIcon } from "./icons";
 
 export function BookingScreen({
   onBack,
@@ -11,171 +11,163 @@ export function BookingScreen({
 }) {
   const [dateIdx, setDateIdx] = useState(0);
   const [timeIdx, setTimeIdx] = useState(5);
-  const [capsuleIdx, setCapsuleIdx] = useState(0);
+  const [hallIdx, setHallIdx] = useState(0);
   const [withTrainer, setWithTrainer] = useState(false);
+  const [trainingTypeIdx, setTrainingTypeIdx] = useState(0);
+  const [trainingTypeOpen, setTrainingTypeOpen] = useState(false);
 
   return (
-    <div className="px-5 pb-4">
-      <div className="flex items-center gap-3 pt-1 pb-4">
-        <button
-          onClick={onBack}
-          className="w-9 h-9 rounded-full bg-white/[0.06] flex items-center justify-center text-white/80 shrink-0"
-        >
-          <ChevronLeft className="w-5 h-5" />
+    <div className="pad">
+      <div className="topbar">
+        <button className="iconbtn" onClick={onBack}>
+          <ChevronLeft />
         </button>
-        <h1 className="text-white text-[17px] font-semibold">Запись на тренировку</h1>
+        <h1 className="title">Запись на тренировку</h1>
       </div>
 
-      <div className="flex items-center gap-3 rounded-2xl bg-white/[0.04] border border-white/[0.06] p-3 mb-6">
-        <div className="w-11 h-11 rounded-full bg-[#C8FF3D]/15 border border-[#C8FF3D]/30 flex items-center justify-center shrink-0">
-          <CapsuleIcon className="w-5 h-5 text-[#C8FF3D]" />
+      <div className="card">
+        <div className="logo-badge">
+          <HandIcon />
         </div>
-        <div className="flex-1 min-w-0">
-          <p className="text-white text-[14px] font-medium truncate">CAPS FIT — Путилково</p>
-          <div className="flex items-center gap-1 text-[12px] text-white/50">
-            <StarIcon className="w-3.5 h-3.5 text-[#C8FF3D]" filled />
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <p className="studio-name">Stop For Fit — Путилково</p>
+          <div className="studio-rating">
+            <StarIcon filled />
             <span>4.9 · (860 отзывов)</span>
           </div>
         </div>
-        <button className="w-8 h-8 rounded-full bg-white/[0.06] flex items-center justify-center text-white/60 shrink-0">
-          <StarIcon className="w-4 h-4" />
-        </button>
       </div>
 
-      <Section title="Выберите капсулу">
-        <div className="flex flex-col gap-2">
-          {capsules.map((c, i) => {
-            const active = i === capsuleIdx;
-            return (
-              <button
-                key={c.id}
-                onClick={() => setCapsuleIdx(i)}
-                className={`flex items-center gap-3 rounded-2xl border p-3 text-left transition-colors ${
-                  active
-                    ? "border-[#C8FF3D] bg-[#C8FF3D]/[0.08]"
-                    : "border-white/[0.07] bg-white/[0.03]"
-                }`}
-              >
-                <div
-                  className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${
-                    active ? "bg-[#C8FF3D] text-black" : "bg-white/[0.06] text-white/60"
-                  }`}
-                >
-                  <CapsuleIcon className="w-5 h-5" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-white text-[13.5px] font-medium">{c.name}</p>
-                  <p className="text-white/45 text-[12px]">
-                    {c.size} · {c.equipment}
-                  </p>
-                </div>
-                <div
-                  className={`w-5 h-5 rounded-full border shrink-0 flex items-center justify-center ${
-                    active ? "border-[#C8FF3D] bg-[#C8FF3D]" : "border-white/25"
-                  }`}
-                >
-                  {active && <div className="w-2 h-2 rounded-full bg-black" />}
-                </div>
-              </button>
-            );
-          })}
+      <div className="section">
+        <h2 className="section">Выберите зал</h2>
+        <div className="capsule-list">
+          {halls.map((h, i) => (
+            <button
+              key={h.id}
+              className={`capsule-item ${i === hallIdx ? "active" : ""}`}
+              onClick={() => setHallIdx(i)}
+            >
+              <div className="capsule-icon">
+                <HandIcon />
+              </div>
+              <div>
+                <p className="name">{h.name}</p>
+                <p className="meta">
+                  {h.size} · {h.equipment}
+                </p>
+              </div>
+              <div className="radio">
+                <div className="radio-dot" />
+              </div>
+            </button>
+          ))}
         </div>
-      </Section>
+      </div>
 
-      <Section title="Выберите дату">
-        <div className="flex gap-2 overflow-x-auto -mx-5 px-5 pb-1">
-          {dates.map((d, i) => {
-            const active = i === dateIdx;
-            return (
-              <button
-                key={d.day}
-                onClick={() => setDateIdx(i)}
-                className={`shrink-0 w-16 py-3 rounded-2xl text-center transition-colors ${
-                  active ? "bg-[#C8FF3D] text-black" : "bg-white/[0.05] text-white/70"
-                }`}
-              >
-                <div className="text-[16px] font-semibold leading-tight">{d.day}</div>
-                <div className="text-[10.5px] uppercase opacity-70">Авг</div>
-                <div className="text-[11px] mt-0.5 opacity-80">{d.weekday}</div>
-              </button>
-            );
-          })}
+      <div className="section">
+        <h2 className="section">Выберите дату</h2>
+        <div className="date-scroll">
+          {dates.map((d, i) => (
+            <button
+              key={d.day}
+              className={`date-pill ${i === dateIdx ? "active" : ""}`}
+              onClick={() => setDateIdx(i)}
+            >
+              <div className="dd">{d.day}</div>
+              <div className="mm">Авг</div>
+              <div className="wd">{d.weekday}</div>
+            </button>
+          ))}
         </div>
-      </Section>
+      </div>
 
-      <Section title="Выберите время">
-        <div className="grid grid-cols-4 gap-2">
-          {times.map((t, i) => {
-            const active = i === timeIdx;
-            return (
+      <div className="section">
+        <h2 className="section">Выберите время</h2>
+        <div className="time-grid">
+          {times.map((t, i) => (
+            <button
+              key={t}
+              className={`time-pill ${i === timeIdx ? "active" : ""}`}
+              onClick={() => setTimeIdx(i)}
+            >
+              {t}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className="section">
+        <h2 className="section">Тренер</h2>
+        <div className="trainer-row">
+          <button
+            className={`trainer-opt ${!withTrainer ? "active" : ""}`}
+            onClick={() => setWithTrainer(false)}
+          >
+            <div className="avatar">
+              <UserIcon />
+            </div>
+            <div>
+              <p>Самостоятельно</p>
+              <p>Без тренера</p>
+            </div>
+          </button>
+          <button
+            className={`trainer-opt ${withTrainer ? "active" : ""}`}
+            onClick={() => setWithTrainer(true)}
+          >
+            <div className="avatar">
+              <ChevronRight />
+            </div>
+            <div>
+              <p>С тренером</p>
+              <p>Выбрать профи</p>
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <div className="section">
+        <h2 className="section">Тип тренировки</h2>
+        <button className="type-select" onClick={() => setTrainingTypeOpen((o) => !o)}>
+          <span>{trainingTypeOptions[trainingTypeIdx]}</span>
+          <svg
+            className={`type-select-chev ${trainingTypeOpen ? "open" : ""}`}
+            viewBox="0 0 24 24"
+            fill="none"
+          >
+            <path
+              d="M6 9l6 6 6-6"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </button>
+        {trainingTypeOpen && (
+          <div className="capsule-list" style={{ marginTop: 8 }}>
+            {trainingTypeOptions.map((t, i) => (
               <button
                 key={t}
-                onClick={() => setTimeIdx(i)}
-                className={`py-2.5 rounded-xl text-[13px] font-medium transition-colors ${
-                  active
-                    ? "bg-[#C8FF3D] text-black"
-                    : "bg-white/[0.05] text-white/70 border border-white/[0.06]"
-                }`}
+                className={`type-option ${i === trainingTypeIdx ? "active" : ""}`}
+                onClick={() => {
+                  setTrainingTypeIdx(i);
+                  setTrainingTypeOpen(false);
+                }}
               >
-                {t}
+                <span>{t}</span>
+                <div className="radio">
+                  <div className="radio-dot" />
+                </div>
               </button>
-            );
-          })}
-        </div>
-      </Section>
+            ))}
+          </div>
+        )}
+      </div>
 
-      <Section title="Тренер">
-        <div className="flex gap-2">
-          <button
-            onClick={() => setWithTrainer(false)}
-            className={`flex-1 flex items-center gap-2.5 rounded-2xl border p-3 text-left transition-colors ${
-              !withTrainer
-                ? "border-[#C8FF3D] bg-[#C8FF3D]/[0.08]"
-                : "border-white/[0.07] bg-white/[0.03]"
-            }`}
-          >
-            <div className="w-9 h-9 rounded-full bg-white/[0.07] flex items-center justify-center text-white/60 shrink-0">
-              <UserIcon className="w-4.5 h-4.5" />
-            </div>
-            <div className="min-w-0">
-              <p className="text-white text-[13px] font-medium">Самостоятельно</p>
-              <p className="text-white/45 text-[11px]">Без тренера</p>
-            </div>
-          </button>
-          <button
-            onClick={() => setWithTrainer(true)}
-            className={`flex-1 flex items-center gap-2.5 rounded-2xl border p-3 text-left transition-colors ${
-              withTrainer
-                ? "border-[#C8FF3D] bg-[#C8FF3D]/[0.08]"
-                : "border-white/[0.07] bg-white/[0.03]"
-            }`}
-          >
-            <div className="w-9 h-9 rounded-full bg-white/[0.07] flex items-center justify-center text-white/60 shrink-0">
-              <ChevronRight className="w-4.5 h-4.5" />
-            </div>
-            <div className="min-w-0">
-              <p className="text-white text-[13px] font-medium">С тренером</p>
-              <p className="text-white/45 text-[11px]">Выбрать профи</p>
-            </div>
-          </button>
-        </div>
-      </Section>
-
-      <button
-        onClick={onContinue}
-        className="w-full mt-2 py-3.5 rounded-2xl bg-[#C8FF3D] text-black text-[15px] font-semibold active:scale-[0.98] transition-transform"
-      >
+      <button className="cta" onClick={onContinue}>
         Продолжить
       </button>
-    </div>
-  );
-}
-
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <div className="mb-6">
-      <h2 className="text-white/90 text-[14.5px] font-semibold mb-2.5">{title}</h2>
-      {children}
     </div>
   );
 }
