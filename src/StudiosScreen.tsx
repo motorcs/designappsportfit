@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, AttributionControl, useMap } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
@@ -85,7 +85,7 @@ export function StudiosScreen({ onOpenStudio }: { onOpenStudio: (studio: Studio)
         center={CENTER}
         zoom={10}
         zoomControl={false}
-        attributionControl={true}
+        attributionControl={false}
         className="flex-1 w-full"
       >
         <TileLayer
@@ -93,6 +93,7 @@ export function StudiosScreen({ onOpenStudio }: { onOpenStudio: (studio: Studio)
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
           maxZoom={19}
         />
+        <AttributionControl prefix={false} />
         {studios.map((s, i) => (
           <Marker
             key={s.id}
