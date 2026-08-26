@@ -18,10 +18,26 @@ export function StatsScreen({ onBack }: { onBack: () => void }) {
 
       <div className="stats-brand">
         <svg viewBox="0 0 200 60" height="40">
-          <text x="0" y="24" fontFamily="Poppins" fontWeight="800" fontSize="24" fill="var(--white)">
+          <text
+            x="100"
+            y="24"
+            textAnchor="middle"
+            fontFamily="Poppins"
+            fontWeight="800"
+            fontSize="24"
+            fill="var(--white)"
+          >
             STOP
           </text>
-          <text x="0" y="50" fontFamily="Poppins" fontWeight="800" fontSize="24" fill="var(--red)">
+          <text
+            x="100"
+            y="50"
+            textAnchor="middle"
+            fontFamily="Poppins"
+            fontWeight="800"
+            fontSize="24"
+            fill="var(--red)"
+          >
             FOR FIT
           </text>
         </svg>
