@@ -1459,22 +1459,15 @@ h2.section::before {
   border: 2px solid var(--white);
   cursor: pointer;
 }
-.map-studio-pin {
-  width: 34px;
-  height: 34px;
-  border-radius: 999px 999px 999px 2px;
-  transform: rotate(45deg);
-  background: var(--white);
-  border: none;
+.map-studio-dot {
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  background: var(--red);
+  border: 3px solid var(--white);
   padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
   cursor: pointer;
-}
-.map-studio-pin svg {
-  transform: rotate(-45deg);
 }
 .maplibregl-ctrl-attrib {
   font-size: 9px !important;

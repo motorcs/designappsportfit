@@ -63,15 +63,13 @@ export function StudiosScreen({ onOpenStudio }: { onOpenStudio: (studio: Studio)
 
     for (const s of studios) {
       const el = document.createElement("button");
-      el.className = "map-studio-pin";
-      el.innerHTML =
-        '<svg viewBox="0 0 24 24" width="18" height="18" fill="none"><path d="M4 11.5C4 7 7.6 4 12 4s8 3 8 7.5c0 3.8-3.2 6.6-6.4 8.7a2.9 2.9 0 0 1-3.2 0C7.2 18.1 4 15.3 4 11.5z" stroke="#EB3325" stroke-width="1.8"/><circle cx="12" cy="11" r="2.6" fill="#EB3325"/></svg>';
+      el.className = "map-studio-dot";
       el.addEventListener("click", (e) => {
         e.stopPropagation();
         setSelected(s);
         map.flyTo({ center: [s.lng, s.lat], zoom: Math.max(map.getZoom(), 11) });
       });
-      new maplibregl.Marker({ element: el, anchor: "bottom" }).setLngLat([s.lng, s.lat]).addTo(map);
+      new maplibregl.Marker({ element: el, anchor: "center" }).setLngLat([s.lng, s.lat]).addTo(map);
     }
 
     const fit = () => {
