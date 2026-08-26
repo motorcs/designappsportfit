@@ -16,33 +16,6 @@ export function StatsScreen({ onBack }: { onBack: () => void }) {
         </h1>
       </div>
 
-      <div className="stats-brand">
-        <svg viewBox="0 0 200 60" height="40">
-          <text
-            x="100"
-            y="24"
-            textAnchor="middle"
-            fontFamily="Poppins"
-            fontWeight="800"
-            fontSize="24"
-            fill="var(--white)"
-          >
-            STOP
-          </text>
-          <text
-            x="100"
-            y="50"
-            textAnchor="middle"
-            fontFamily="Poppins"
-            fontWeight="800"
-            fontSize="24"
-            fill="var(--red)"
-          >
-            FOR FIT
-          </text>
-        </svg>
-      </div>
-
       <h2 className="section">Общая статистика</h2>
       <div className="stats-select">
         <span>За все время</span>
