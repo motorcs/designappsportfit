@@ -372,6 +372,7 @@ h2.section::before {
   color: var(--white);
 }
 .capsule-item .name {
+  flex: 1;
   color: var(--white);
   font-size: 13.5px;
   font-weight: 600;

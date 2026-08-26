@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { dates, times, halls, trainingTypeOptions, equipment, studioPhotos, studioReviews } from "./data";
+import type { Studio } from "./StudiosScreen";
 import {
   ChevronLeft,
   ChevronRight,
@@ -52,9 +53,11 @@ function Stars({ count }: { count: number }) {
 }
 
 export function BookingScreen({
+  studio,
   onBack,
   onContinue,
 }: {
+  studio: Studio | null;
   onBack: () => void;
   onContinue: () => void;
 }) {
@@ -81,10 +84,10 @@ export function BookingScreen({
           <HandIcon />
         </div>
         <div style={{ flex: 1, minWidth: 0 }}>
-          <p className="studio-name">Stop For Fit — Путилково</p>
+          <p className="studio-name">{studio?.name ?? 'ЖК "Большое Путилково"'}</p>
           <div className="studio-rating">
             <StarIcon filled />
-            <span>4.9 · (860 отзывов)</span>
+            <span>{studio?.rating ?? 4.9} · (860 отзывов)</span>
           </div>
         </div>
       </div>
@@ -114,15 +117,7 @@ export function BookingScreen({
               className={`capsule-item ${i === hallIdx ? "active" : ""}`}
               onClick={() => setHallIdx(i)}
             >
-              <div className="capsule-icon">
-                <HandIcon />
-              </div>
-              <div>
-                <p className="name">{h.name}</p>
-                <p className="meta">
-                  {h.size} · {h.equipment}
-                </p>
-              </div>
+              <p className="name">{h.name}</p>
               <div className="radio">
                 <div className="radio-dot" />
               </div>

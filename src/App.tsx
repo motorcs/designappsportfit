@@ -2,7 +2,7 @@ import { useState } from "react";
 import { PhoneShell } from "./PhoneShell";
 import { BottomNav, type Tab } from "./BottomNav";
 import { SplashScreen } from "./SplashScreen";
-import { StudiosScreen } from "./StudiosScreen";
+import { StudiosScreen, type Studio } from "./StudiosScreen";
 import { BookingScreen } from "./BookingScreen";
 import { SubscriptionScreen } from "./SubscriptionScreen";
 import { HistoryScreen } from "./HistoryScreen";
@@ -80,6 +80,7 @@ function App() {
   const [tab, setTab] = useState<Tab>("studios");
   const [screen, setScreen] = useState<Screen>("splash");
   const [historyIdx, setHistoryIdx] = useState(0);
+  const [selectedStudio, setSelectedStudio] = useState<Studio | null>(null);
 
   const showNav = !NO_NAV.includes(screen);
 
@@ -93,9 +94,17 @@ function App() {
       <div className="h-full flex flex-col">
         <div className="flex-1 flex flex-col min-h-0 screen">
           {screen === "splash" && <SplashScreen onDone={() => switchTab("studios")} />}
-          {screen === "studios" && <StudiosScreen onOpenStudio={() => setScreen("booking")} />}
+          {screen === "studios" && (
+            <StudiosScreen
+              onOpenStudio={(studio) => {
+                setSelectedStudio(studio);
+                setScreen("booking");
+              }}
+            />
+          )}
           {screen === "booking" && (
             <BookingScreen
+              studio={selectedStudio}
               onBack={() => setScreen("studios")}
               onContinue={() => setScreen("subscription")}
             />
