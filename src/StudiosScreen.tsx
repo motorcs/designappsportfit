@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import * as maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 
@@ -12,9 +12,15 @@ type Studio = {
 };
 
 const studios: Studio[] = [
-  { id: "s1", name: "Stop For Fit — Путилково", lat: 55.8586, lng: 37.394, freeHalls: 2, rating: 4.9 },
-  { id: "s2", name: "Stop For Fit — Химки", lat: 55.8967, lng: 37.4297, freeHalls: 1, rating: 4.7 },
-  { id: "s3", name: "Stop For Fit — Мосрентген", lat: 55.5993, lng: 37.4569, freeHalls: 2, rating: 4.8 },
+  { id: "s1", name: 'ЖК "Большое Путилково"', lat: 55.8657, lng: 37.3927, freeHalls: 2, rating: 4.9 },
+  { id: "s2", name: "Просторная, 7", lat: 55.8057, lng: 37.7149, freeHalls: 1, rating: 4.7 },
+  { id: "s3", name: 'Коттеджный посёлок "Мечта-2"', lat: 56.0737, lng: 37.3724, freeHalls: 2, rating: 4.8 },
+  { id: "s4", name: "Одинцовский парк культуры", lat: 55.6907, lng: 37.2502, freeHalls: 2, rating: 4.9 },
+  { id: "s5", name: "Эко Бунино", lat: 55.5408, lng: 37.455, freeHalls: 1, rating: 4.7 },
+  { id: "s6", name: 'ЖК "Остафьево"', lat: 55.5006, lng: 37.5192, freeHalls: 2, rating: 4.8 },
+  { id: "s7", name: "Крымская, 10", lat: 55.6186, lng: 37.9583, freeHalls: 1, rating: 4.6 },
+  { id: "s8", name: 'ЖК "Люберцы-2"', lat: 55.7003, lng: 37.8812, freeHalls: 2, rating: 4.8 },
+  { id: "s9", name: 'ЖК "Люберцы-1"', lat: 55.698, lng: 37.875, freeHalls: 1, rating: 4.7 },
 ];
 
 const CENTER: [number, number] = [37.6173, 55.7558];
@@ -36,6 +42,7 @@ const mapStyle: maplibregl.StyleSpecification = {
 export function StudiosScreen({ onOpenStudio }: { onOpenStudio: (studio: Studio) => void }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
+  const [selected, setSelected] = useState<Studio | null>(null);
 
   useEffect(() => {
     if (!containerRef.current || mapRef.current) return;
@@ -54,16 +61,21 @@ export function StudiosScreen({ onOpenStudio }: { onOpenStudio: (studio: Studio)
     mapRef.current = map;
 
     for (const s of studios) {
-      const el = document.createElement("div");
-      el.className = "map-pin-chip";
-      el.textContent = String(s.freeHalls);
-      el.addEventListener("click", () => onOpenStudio(s));
-      new maplibregl.Marker({ element: el, anchor: "center" }).setLngLat([s.lng, s.lat]).addTo(map);
+      const el = document.createElement("button");
+      el.className = "map-studio-pin";
+      el.innerHTML =
+        '<svg viewBox="0 0 24 24" width="18" height="18" fill="none"><path d="M4 11.5C4 7 7.6 4 12 4s8 3 8 7.5c0 3.8-3.2 6.6-6.4 8.7a2.9 2.9 0 0 1-3.2 0C7.2 18.1 4 15.3 4 11.5z" stroke="#EB3325" stroke-width="1.8"/><circle cx="12" cy="11" r="2.6" fill="#EB3325"/></svg>';
+      el.addEventListener("click", (e) => {
+        e.stopPropagation();
+        setSelected(s);
+        map.flyTo({ center: [s.lng, s.lat], zoom: Math.max(map.getZoom(), 11) });
+      });
+      new maplibregl.Marker({ element: el, anchor: "bottom" }).setLngLat([s.lng, s.lat]).addTo(map);
     }
 
     const fit = () => {
       map.resize();
-      map.fitBounds(bounds, { padding: 60, maxZoom: 12, animate: false });
+      map.fitBounds(bounds, { padding: 60, maxZoom: 10.5, animate: false });
     };
     const ro = new ResizeObserver(fit);
     ro.observe(containerRef.current);
@@ -109,7 +121,11 @@ export function StudiosScreen({ onOpenStudio }: { onOpenStudio: (studio: Studio)
         </button>
       </div>
 
-      <div ref={containerRef} className="flex-1 w-full" />
+      <div
+        ref={containerRef}
+        className="flex-1 w-full"
+        onClick={() => setSelected(null)}
+      />
 
       <button
         className="absolute bottom-24 right-4 z-[500] w-11 h-11 rounded-full bg-white shadow-lg flex items-center justify-center"
@@ -127,28 +143,30 @@ export function StudiosScreen({ onOpenStudio }: { onOpenStudio: (studio: Studio)
         </svg>
       </button>
 
-      <button
-        onClick={() => onOpenStudio(studios[0])}
-        className="absolute left-3 right-3 bottom-4 z-[500] flex items-center gap-3 bg-[#1A1A1A] border border-white/10 rounded-2xl p-3 shadow-2xl text-left"
-      >
-        <div className="w-11 h-11 rounded-2xl bg-[#EB3325]/15 border border-[#EB3325]/30 flex items-center justify-center shrink-0">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none">
-            <rect x="4" y="4" width="16" height="16" rx="6" stroke="#EB3325" strokeWidth="1.8" />
-            <path
-              d="M8 15c1-1.5 2.2-2.2 4-2.2s3 .7 4 2.2M9 9.5h.01M13 9h4"
-              stroke="#EB3325"
-              strokeWidth="1.6"
-              strokeLinecap="round"
-            />
-          </svg>
-        </div>
-        <div className="flex-1 min-w-0">
-          <p className="text-white text-[14px] font-semibold truncate">{studios[0].name}</p>
-          <p className="text-white/50 text-[12px]">
-            {studios[0].rating} · {studios[0].freeHalls} зала свободно
-          </p>
-        </div>
-      </button>
+      {selected && (
+        <button
+          onClick={() => onOpenStudio(selected)}
+          className="absolute left-3 right-3 bottom-4 z-[500] flex items-center gap-3 bg-[#1A1A1A] border border-white/10 rounded-2xl p-3 shadow-2xl text-left"
+        >
+          <div className="w-11 h-11 rounded-2xl bg-[#EB3325]/15 border border-[#EB3325]/30 flex items-center justify-center shrink-0">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none">
+              <rect x="4" y="4" width="16" height="16" rx="6" stroke="#EB3325" strokeWidth="1.8" />
+              <path
+                d="M8 15c1-1.5 2.2-2.2 4-2.2s3 .7 4 2.2M9 9.5h.01M13 9h4"
+                stroke="#EB3325"
+                strokeWidth="1.6"
+                strokeLinecap="round"
+              />
+            </svg>
+          </div>
+          <div className="flex-1 min-w-0">
+            <p className="text-white text-[14px] font-semibold truncate">{selected.name}</p>
+            <p className="text-white/50 text-[12px]">
+              {selected.rating} · {selected.freeHalls} зала свободно
+            </p>
+          </div>
+        </button>
+      )}
     </div>
   );
 }
