@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import * as maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
+import { HandIcon } from "./icons";
 
 export type Studio = {
   id: string;
@@ -149,15 +150,7 @@ export function StudiosScreen({ onOpenStudio }: { onOpenStudio: (studio: Studio)
           className="absolute left-3 right-3 bottom-4 z-[500] flex items-center gap-3 bg-[#1A1A1A] border border-white/10 rounded-2xl p-3 shadow-2xl text-left"
         >
           <div className="w-11 h-11 rounded-2xl bg-[#EB3325]/15 border border-[#EB3325]/30 flex items-center justify-center shrink-0">
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="none">
-              <rect x="4" y="4" width="16" height="16" rx="6" stroke="#EB3325" strokeWidth="1.8" />
-              <path
-                d="M8 15c1-1.5 2.2-2.2 4-2.2s3 .7 4 2.2M9 9.5h.01M13 9h4"
-                stroke="#EB3325"
-                strokeWidth="1.6"
-                strokeLinecap="round"
-              />
-            </svg>
+            <HandIcon className="w-5 h-5 text-[#EB3325]" />
           </div>
           <div className="flex-1 min-w-0">
             <p className="text-white text-[14px] font-semibold truncate">{selected.name}</p>
