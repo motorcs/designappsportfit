@@ -13,12 +13,12 @@ type Studio = {
 
 const studios: Studio[] = [
   { id: "s1", name: 'ЖК "Большое Путилково"', lat: 55.8657, lng: 37.3927, freeHalls: 2, rating: 4.9 },
-  { id: "s2", name: "Просторная, 7", lat: 55.8057, lng: 37.7149, freeHalls: 1, rating: 4.7 },
+  { id: "s2", name: "Просторная, 7", lat: 55.866, lng: 37.389, freeHalls: 1, rating: 4.7 },
   { id: "s3", name: 'Коттеджный посёлок "Мечта-2"', lat: 56.0737, lng: 37.3724, freeHalls: 2, rating: 4.8 },
   { id: "s4", name: "Одинцовский парк культуры", lat: 55.6907, lng: 37.2502, freeHalls: 2, rating: 4.9 },
   { id: "s5", name: "Эко Бунино", lat: 55.5408, lng: 37.455, freeHalls: 1, rating: 4.7 },
   { id: "s6", name: 'ЖК "Остафьево"', lat: 55.5006, lng: 37.5192, freeHalls: 2, rating: 4.8 },
-  { id: "s7", name: "Крымская, 10", lat: 55.6186, lng: 37.9583, freeHalls: 1, rating: 4.6 },
+  { id: "s7", name: "Крымская, 10", lat: 55.42, lng: 37.85, freeHalls: 1, rating: 4.6 },
   { id: "s8", name: 'ЖК "Люберцы-2"', lat: 55.7003, lng: 37.8812, freeHalls: 2, rating: 4.8 },
   { id: "s9", name: 'ЖК "Люберцы-1"', lat: 55.698, lng: 37.875, freeHalls: 1, rating: 4.7 },
 ];
